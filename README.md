@@ -1,8 +1,7 @@
 # 🌱환경을 생각하는 MZ들의 공간, MOAMZ
 스프링부트 프로젝트
 
-
-<img width="500" alt="moamz_logo" src="https://github.com/user-attachments/assets/f7230f08-9a71-449c-855f-6f2651ab0d5c">
+<img width="350" alt="moamz_logo" src="https://github.com/user-attachments/assets/44613a14-3f1f-47a7-8712-3c2ba6cdd969">
 <br>
 
 ## 🖥️서비스 소개
