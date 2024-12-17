@@ -14,16 +14,18 @@
     </select>
     
         <!-- 에코프로젝트(상위 2개)-->
-        <select id="selectMainEco" parameterType="Long" resultType="MainPageDTO">
-            SELECT * FROM (
-            SELECT pf.FG_POST_FILE_ROOT,pf.FG_POST_FILE_ID, pf.FG_POST_FILE_NAME, pf.FG_POST_FILE_UUID,p.FG_POST_TITLE,e.FG_ECO_START,e.FG_ECO_END,e.FG_CERT_INFO,p.FG_POST_LIKES
-            FROM FG_POST_FILE pf JOIN FG_POST p
-                ON pf.FG_POST_ID = p.FG_POST_ID
-            JOIN FG_ECO e
-                ON p.FG_POST_ID = e.FG_POST_ID
-            ORDER BY p.FG_POST_LIKES DESC
-            ) WHERE <![CDATA[ROWNUM <= 2]]>
-        </select>
+    <select id="selectMainEco" parameterType="Long" resultType="MainPageDTO">
+        SELECT * FROM (
+        SELECT pf.FG_POST_FILE_ROOT, pf.FG_POST_FILE_ID, pf.FG_POST_FILE_NAME, pf.FG_POST_FILE_UUID,
+        p.FG_POST_TITLE, e.FG_ECO_START, e.FG_ECO_END, e.FG_CERT_INFO, p.FG_POST_LIKES
+        FROM FG_POST_FILE pf
+        JOIN FG_POST p ON pf.FG_POST_ID = p.FG_POST_ID
+        JOIN FG_ECO e ON p.FG_POST_ID = e.FG_POST_ID
+        WHERE e.FG_ECO_END >= SYSDATE
+        ORDER BY p.FG_POST_LIKES DESC
+        )
+        WHERE <![CDATA[ROWNUM <= 2]]>
+    </select>
 
         <!--  레시피  -->
         <select id="selectMainRecipe" parameterType="Long" resultType="MainPageDTO">

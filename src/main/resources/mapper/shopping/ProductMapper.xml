@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.moamz.mapper.shopping.ProductMapper">
 <!--    상품 리스트 mapper-->
-    <select id="productList" resultType="ProductListDTO">
+    <select id="productList" resultType="ProductListMainDTO">
         select p.FG_PRODUCT_ID AS fgProductId,
                p.FG_PRODUCT_NAME AS fgProductName,
                p.FG_PRODUCT_CONTENT AS fgProductContent,
@@ -21,35 +21,7 @@
                  left join FG_PRODUCT_FILE f on p.FG_PRODUCT_ID = f.FG_PRODUCT_ID
     </select>
 
-<!--    주문등록-->
-    <insert id="insertOrder" parameterType="OrderDTO">
-        <selectKey keyProperty="fgOrderId" order="BEFORE">
-            SELECT SEQ_FG_ORDER.NEXTVAL FROM DUAL
-        </selectKey>
-        INSERT INTO FG_ORDER (
-        FG_ORDER_ID,
-        FG_PAYMENT_STATUS,
-        FG_ORDER_QUANTITY,
-        FG_ORDER_PER_PRICE,
-        FG_ORDER_TAX,
-        FG_ORDER_USED_POINT,
-        FG_ORDER_AMOUNT,
-        FG_ORDER_DATE,
-        FG_USER_CODE,
-        FG_PRODUCT_ID
-        ) VALUES (
-        #{fgOrderId},
-        #{fgPaymentStatus},
-        #{fgOrderQuantity},
-        #{fgOrderPerPrice},
-        #{fgOrderTax},
-        #{fgOrderUsedPoint},
-        #{fgOrderAmount},
-        SYSDATE,
-        #{fgUserCode},
-        #{fgProductId}
-        )
-    </insert>
+
 
     <!-- 결제 상태 업데이트 -->
     <update id="updateOrderPaymentStatus" parameterType="OrderUpdateDTO">
@@ -61,23 +33,6 @@
             FG_ORDER_ID = #{fgOrderId}
     </update>
 
-    <!-- 주문 상세 추가 -->
-    <insert id="insertOrderDetail" parameterType="OrderDetailDTO">
-        <selectKey keyProperty="fgOrderDetailId" order="BEFORE">
-            SELECT SEQ_FG_ORDER_DETAIL.NEXTVAL FROM DUAL
-        </selectKey>
-        INSERT INTO FG_ORDER_DETAIL (
-        FG_ORDER_DETAIL_ID,
-        FG_TRANSACTION_ID,
-        FG_ORDER_ID,
-        FG_PRODUCT_NAME
-        ) VALUES (
-        #{fgOrderDetailId},
-        #{fgTransactionId},
-        #{fgOrderId},
-        #{fgProductName}
-        )
-    </insert>
 
     <!-- 픽업 일정 추가 -->
     <insert id="insertPickup" parameterType="PickupDTO">
@@ -165,6 +120,126 @@
     <delete id="deleteCart" parameterType="Long">
         DELETE  FROM FG_CART_DETAIL WHERE FG_CART_DETAIL_ID = #{fgCartDetailId}
     </delete>
+
+    <!--orderId 만들기-->
+    <select id="selectOrderId" resultType="Long">
+        select SEQ_FG_ORDER.nextval from dual
+    </select>
+
+    <select id="selectOrderDetailId" resultType="Long">
+        select SEQ_FG_ORDER_DETAIL.nextval from dual
+    </select>
+
+    <!-- 주문 데이터 삽입 -->
+    <insert id="insertOrder" parameterType="OrderDTO">
+        <selectKey resultType="Long" keyProperty="fgOrderId" order="BEFORE">
+            select SEQ_FG_ORDER.nextval from dual
+        </selectKey>
+        INSERT INTO FG_ORDER (
+            FG_ORDER_ID, FG_PAYMENT_STATUS, FG_ORDER_QUANTITY, FG_ORDER_PER_PRICE,
+            FG_ORDER_TAX, FG_ORDER_USED_POINT, FG_ORDER_AMOUNT, FG_ORDER_DATE,
+            FG_USER_CODE, FG_PRODUCT_ID, FG_BUSINESS_ID
+        ) VALUES (
+                     #{fgOrderId}, #{fgPaymentStatus}, #{fgOrderQuantity}, #{fgOrderPerPrice},
+                     #{fgOrderTax}, #{fgOrderUsedPoint}, #{fgOrderAmount}, SYSDATE,
+                     #{fgUserCode}, #{fgProductId}, #{fgBusinessId}
+                 )
+    </insert>
+
+    <!-- 주문 상세 데이터 삽입 -->
+    <insert id="insertOrderDetail" parameterType="OrderDetailDTO">
+        <selectKey keyProperty="fgOrderDetailId" resultType="Long" order="BEFORE">
+            select SEQ_FG_ORDER_DETAIL.nextval from dual
+        </selectKey>
+        INSERT INTO FG_ORDER_DETAIL (
+            FG_ORDER_DETAIL_ID, FG_TRANSACTION_ID, FG_ORDER_ID, FG_PRODUCT_NAME
+        ) VALUES (
+                     #{fgOrderDetailId}, #{fgTransactionId}, #{fgOrderId}, #{fgProductName}
+                 )
+    </insert>
+
+    <!-- 상품 ID로 사업자 ID 조회 -->
+    <select id="getBusinessIdByProductId" parameterType="long" resultType="long">
+        SELECT FG_BUSINESS_ID
+        FROM FG_PRODUCT
+        WHERE FG_PRODUCT_ID = #{fgProductId}
+    </select>
+
+    <!-- 상품 ID로 상품 이름 조회 -->
+    <select id="getProductNameByProductId" parameterType="long" resultType="string">
+        SELECT FG_PRODUCT_NAME
+        FROM FG_PRODUCT
+        WHERE FG_PRODUCT_ID = #{fgProductId}
+    </select>
+
+    <select id="getOrderByOrderCode" resultType="OrderDTO" parameterType="Long">
+        SELECT *
+        FROM FG_ORDER
+        WHERE fg_order_id = #{orderCode}
+    </select>
+
+    <select id="getLatestOrder" resultType="OrderDTO">
+        SELECT *
+        FROM (
+                 SELECT *
+                 FROM FG_ORDER
+                 ORDER BY FG_ORDER_DATE DESC
+             )
+        WHERE ROWNUM = 1
+    </select>
+
+    <update id="approveOrder">
+        UPDATE FG_ORDER
+        SET FG_PAYMENT_STATUS = '결제완료'
+        WHERE FG_ORDER_ID = (
+            SELECT FG_ORDER_ID
+            FROM (
+                     SELECT FG_ORDER_ID
+                     FROM FG_ORDER
+                     WHERE FG_PAYMENT_STATUS = '결제중'
+                     ORDER BY FG_ORDER_DATE DESC
+                 )
+            WHERE ROWNUM = 1
+        )
+    </update>
+
+    <select id="showProduct" resultType="ProductShopDetailDTO" parameterType="Long">
+        SELECT
+            P.FG_PRODUCT_ID AS fgProductId,
+            P.FG_PRODUCT_NAME AS fgProductName,
+            P.FG_PRODUCT_PRICE AS fgProductPrice,
+            P.FG_PRODUCT_WEIGHT AS fgProductWeight,
+            P.FG_PRODUCT_EXP_DATE AS fgProductExpDate,
+            P.FG_PRODUCT_STOCK AS fgProductStock,
+            P.FG_PRODUCT_CONTENT AS fgProductContent,
+            P.FG_PRODUCT_TIME AS fgProductTime,
+
+            B.FG_BUSINESS_ID AS fgBusinessId,
+            B.FG_BUSINESS_NAME AS fgBusinessName,
+            B.FG_BUSINESS_OPEN_TIME AS fgBusinessOpenTime,
+            B.FG_BUSINESS_CLOSE_TIME AS fgBusinessCloseTime,
+            B.FG_BUSINESS_ADDRESS AS fgBusinessAddress,
+            B.FG_BUSINESS_ADDRESS_DETAIL AS fgBusinessAddressDetail,
+            B.FG_BUSINESS_POSTCODE AS fgBusinessPostCode,
+            B.FG_BUSINESS_DETAIL AS fgBusinessDetail,
+            B.FG_BUSINESS_PHONE AS fgBusinessPhone,
+            B.FG_BUSINESS_RATING AS fgBusinessRating,
+            B.FG_BUSINESS_LIKES AS fgBusinessLikes,
+
+            F.FG_PRODUCT_FILE_NAME AS productFileName,
+            F.FG_PRODUCT_FILE_ROOT AS productFileRoot,
+            F.FG_PRODUCT_FILE_UUID AS productFileUuid
+        FROM
+            FG_PRODUCT P
+                LEFT JOIN
+            FG_BUSINESS B ON P.FG_BUSINESS_ID = B.FG_BUSINESS_ID
+                LEFT JOIN
+            FG_PRODUCT_FILE F ON P.FG_PRODUCT_ID = F.FG_PRODUCT_ID
+        WHERE
+            P.FG_PRODUCT_ID = #{fgProductId}
+    </select>
+
+
 </mapper>
 
 

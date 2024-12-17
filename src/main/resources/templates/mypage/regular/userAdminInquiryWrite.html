@@ -11,6 +11,57 @@
 <body>
     <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
     <main>
+        <!-- 사이드바 영역 -->
+        <section id="side-section">
+            <div class="mypage-list">
+                <div class="mypage-user">
+                    <div class="mypage-user-img">
+                    </div>
+                    <div class="user-name">역삼동 불주먹</div>
+
+                    <!-- user 프로필 정보 -->
+                    <div class="mypage-user-info">
+                        <div class="mypage-user-info-box">
+                            <img th:src="@{/img/mypage/regular/mypageUserPointIcon.png}" alt="포인트 아이콘">
+                            <span>포인트</span>
+                            <span class="info-list">1,000</span>
+                        </div>
+                        <div class="mypage-user-info-box">
+                            <img th:src="@{/img/mypage/regular/mypageUserFoodIcon.png}" alt="포인트 아이콘">
+                            <span>구해준 음식물</span>
+                            <span class="info-list">7.333kg</span>
+                        </div>
+                        <div class="mypage-user-info-box">
+                            <img th:src="@{/img/mypage/regular/mypageUserCo2Icon.png}" alt="포인트 아이콘">
+                            <span>탄소감축량</span>
+                            <span class="info-list">18.25kg</span>
+                        </div>
+                        <div class="mypage-user-info-box">
+                            <img th:src="@{/img/mypage/regular/mypageUserTreeIcon.png}" alt="포인트 아이콘">
+                            <span>내가 심은 나무</span>
+                            <span class="info-list-tree">1 그루</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 마이페이지 메뉴 카테고리 -->
+                <div class="mypage-side-category">
+                    <ul>
+                        <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/review}">● MY리뷰</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/like}">● MY좋아요</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/postEco}">● MY게시글</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/infoauth}" >● 회원정보변경</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+                        <li class="category-list"><a th:href="@{/normal/inquiry/list}" class="clicked">● 관리자 문의</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
         <div class="product-write-container">
             <!-- 제목 영역 -->
             <div class="title-wrap">
@@ -21,11 +72,11 @@
                 <form method="post" th:action="@{/normal/inquiry/regist}">
                     <div class="write-item">
                         <p class="write-label">📝 문의제목*</p>
-                        <input type="text" required/>
+                        <label for="title"></label><input type="text" id="title" name="fgPostTitle" required/>
                     </div>
                     <div class="write-item">
                         <p class="write-label">📝 문의내용*</p>
-                        <textarea required></textarea>
+                        <label for="content"></label><textarea id="content" name="fgPostContent" required></textarea>
                     </div>
                     <div class="btn-wrap">
                         <button id="cancle-btn" type="button">취소</button>

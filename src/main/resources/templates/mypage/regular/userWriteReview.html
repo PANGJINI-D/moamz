@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>userWriteReview</title>
-  <link rel="stylesheet" href="../../../static/css/reset2.css">
-  <link rel="stylesheet" href="../../../static/css/mypage/regular/userWriteReview.css">
-  <script defer src="../../../static/js/mypage/regular/userWriteReview.js"></script>
+  <link rel="stylesheet" th:href="@{/css/reset2.css}">
+  <link rel="stylesheet" th:href="@{/static/css/mypage/regular/userWriteReview.css}">
+  <script defer th:src="@{/static/js/mypage/regular/userWriteReview.js}"></script>
 </head>
 <body>
-  <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
   <main>
     <div class="userWriteReview-container">
       <div class="userWriterReview-title">리뷰 작성하기</div>
@@ -41,13 +41,7 @@
       </form>
     </div>
   </main>
-  <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

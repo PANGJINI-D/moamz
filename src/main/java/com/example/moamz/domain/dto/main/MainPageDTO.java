@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -41,9 +42,9 @@ public class MainPageDTO {
     // 에코프로젝트 상세 페이지
     // 에코프로젝트 사진 파일
     private String fgPostTitle;
-    private LocalDateTime fgEcoStart;
+    private String fgEcoStart;
     private LocalDateTime fgEcoEnd;
-    private Long fgPostLikes;
+    private int fgPostLikes;
     private String fgCertInfo;
 
 

@@ -27,8 +27,9 @@
         <div class="post-info-wrap">
             <div class="post-title" th:text="${receipeDetail?.fgPostTitle}">제목 없음</div>
             <div class="user-info-wrap">
-                <img th:src="@{'/upload_moamz/' + ${receipeDetail.userFileRoot} + '/' + ${receipeDetail.userFileUuid}
-                                                + '_' + ${receipeDetail.userFileName}}">
+<!--                <img th:src="@{'/upload_moamz/' + ${receipeDetail.userFileRoot} + '/' + ${receipeDetail.userFileUuid}-->
+<!--                                                + '_' + ${receipeDetail.userFileName}}">-->
+                <img th:src="@{/img/community/profile.png}">
                 <span class="user-nickname" th:text="${receipeDetail.fgNormalName}">역삼동불주먹먹먹먹먹</span>
                 <div class="post-write-time-wrap">
                     <span>작성일</span>

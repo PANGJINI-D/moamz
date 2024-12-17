@@ -89,7 +89,7 @@
             UF.FG_USER_FILE_ROOT AS fgUserProfile,  -- 프로필 사진 경로
             UF.FG_USER_FILE_ID AS userFileId,       -- 작성자 파일 ID
             UF.FG_USER_FILE_NAME AS userFileName,   -- 작성자 파일명
-            UF.FG_USER_FILE_ROOT AS userFileRoot,   -- 작성자 파일 경로
+                UF.FG_USER_FILE_ROOT AS userFileRoot,   -- 작성자 파일 경로
             UF.FG_USER_FILE_UUID AS userFileUuid    -- 작성자 파일 UUID
         FROM
             FG_ECO_CERT EC

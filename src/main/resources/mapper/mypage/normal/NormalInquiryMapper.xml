@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moamz.mapper.mypage.normal.NormalInquiryMapper">
+    <!-- 문의글 작성(post)  -->
+    <insert id="normalInsertPost" parameterType="NormalInquiryWriteDTO">
+        <selectKey keyProperty="fgPostId" resultType="Long" order="BEFORE">
+            SELECT SEQ_POST.nextVal FROM DUAL
+        </selectKey>
+
+        INSERT INTO FG_POST (FG_POST_ID, FG_POST_TYPE, FG_POST_TITLE, FG_USER_CODE)
+        VALUES (#{fgPostId}, 'inquiry', #{fgPostTitle}, #{fgUserCode})
+    </insert>
+
+
+    <!--  문의글 작성(inquiry)   -->
+    <insert id="normalInsertInquiry" parameterType="NormalInquiryWriteDTO">
+        INSERT INTO FG_INQUIRY (FG_POST_ID, FG_INQUIRY_CONTENT)
+        VALUES (#{fgPostId}, #{fgInquiryContent})
+    </insert>
+
+
+    <!--  문의글 삭제  -->
+    <delete id="normalDeleteInquiry" parameterType="Long">
+        DELETE FROM FG_POST
+        WHERE FG_POST_ID = #{fgPostId}
+    </delete>
+
+    <!-- 문의글 목록   -->
+    <select id="selectNormalInquiryList" resultType="NormalInquiryListDTO">
+        -- 관리자 문의내역 조회
+        SELECT p.FG_POST_ID,
+               p.FG_POST_TITLE,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI'),
+               CASE i.FG_INQUIRY_STATUS
+                   WHEN '0' THEN '확인중'
+                   WHEN '1' THEN '답변완료'
+                   END AS 답변상태
+        FROM FG_POST p, FG_INQUIRY i
+        WHERE p.FG_POST_ID = i.FG_POST_ID
+          AND p.FG_USER_CODE = #{fgUserCode}
+        ORDER BY p.FG_POST_CREATED_AT DESC
+    </select>
+
+    <select id="normalselectTotal" parameterType="Long" resultType="int">
+        SELECT COUNT(FG_POST_ID)
+        FROM FG_POST
+        WHERE FG_POST_TYPE = 'inquiry'
+        AND FG_USER_CODE = #{fgUserCode}
+    </select>
+
+    <!-- 문의글 상세  -->
+    <select id="selectNormalInquiryDetail" parameterType="Long" resultType="NormalInquiryDetailDTO">
+        SELECT c.FG_USER_CODE,
+               p.FG_POST_TITLE,
+--                p.FG_POST_TYPE,
+               p.FG_POST_ID,
+               i.FG_INQUIRY_CONTENT,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI:SS'),
+               n.FG_NORMAL_NICKNAME
+        FROM FG_COMMON_USER c JOIN FG_NORMAL_USER n
+            ON c.FG_USER_CODE = n.FG_USER_CODE
+        JOIN FG_POST p
+            ON c.FG_USER_CODE = p.FG_USER_CODE
+        LEFT JOIN FG_INQUIRY i
+            ON p.FG_POST_ID = i.FG_POST_ID
+--         WHERE p.FG_POST_TYPE = 'inquiry'
+        WHERE p.FG_POST_ID = #{fgPostId}
+    </select>
+
+    <!-- 문의글 댓글  -->
+    <select id="selectInquiryDetailComment" parameterType="Long" resultType="NormalInquiryDetailCommentDTO">
+        SELECT TO_CHAR(c.FG_COMMENT_DATE, 'YY/MM/DD HH24:MI:SS'),
+               c.FG_COMMENT_CONTENT,
+               CASE c.FG_COMMENT_EDIT
+                   WHEN '0' THEN ' '
+                   WHEN '1' THEN '수정됨'
+                   END
+        FROM FG_POST p, FG_COMMENT c
+        WHERE p.FG_POST_ID = c.FG_POST_ID
+          AND p.FG_POST_ID = #{fgPostId}
+    </select>
+</mapper>

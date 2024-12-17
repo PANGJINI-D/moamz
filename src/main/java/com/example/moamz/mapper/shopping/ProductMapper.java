@@ -10,14 +10,9 @@ public interface ProductMapper {
     // 상품리스트
     List<ProductListMainDTO> productList();
 
-    // 주문 등록
-    void insertOrder(OrderDTO orderDTO);
 
     // 결제 상태 업데이트
     void updataOrderPaymentStatus(OrderUpdateDTO orderUpdateDTO);
-
-    // 주문 상세 추가
-    void insertOrderDetail (OrderDetailDTO orderDetailDTO);
 
     // 픽업 일정 추가
     void insertPickup(PickupDTO pickupDTO);
@@ -42,4 +37,22 @@ public interface ProductMapper {
 
     // cartDetail에서 delete
     void deleteCart(Long fgCartDetailId);
+
+//    orderId
+    Long selectOrderId();
+
+    Long selectOrderDetailId();
+
+    void insertOrder(OrderDTO order); // FG_ORDER 데이터 삽입
+    void insertOrderDetail(OrderDetailDTO orderDetail); // FG_ORDER_DETAIL 데이터 삽입
+    Long getBusinessIdByProductId(Long productId); // 상품 ID로 사업자 ID 조회
+    String getProductNameByProductId(Long productId); // 상품 ID로 상품 이름 조회
+
+    OrderDTO getOrderByOrderCode(Long orderCode);
+
+    OrderDTO getLatestOrder();
+
+    void approveOrder();
+
+    ProductShopDetailDTO showProduct(Long fgProductId);
 }

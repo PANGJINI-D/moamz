@@ -117,18 +117,19 @@
         </div>
         <div class="productList-products">
           <div class="productList-product-product">
-            <div class="productList-product-product-box"  style="cursor: pointer;">
+            <div class="productList-product-product-box"  style="cursor: pointer;" th:each="productLists:${productList}">
+              <input type="hidden" id="productId-[[${product.fgProductId}]]" th:value="${productLists.fgProductId}" >
               <div class="productList-product-product-box-pic" >
                 <img th:src="@{/img/shopping/banana.png}" alt="#" onclick="location.href='#'">
                 <button type="button" class="tocart" style="display: none">
                   <img th:src="@{/img/shopping/tocart.png}" alt="#">
                 </button>
               </div>
-              <div class="productList-product-product-box-text">
-                <div class="productList-product-product-box-text-name">
+              <div class="productList-product-product-box-text" th:onclick="|location.href='@{/shop/detail/{fgProductId}(fgProductId=${productLists.fgProductId})}'|">
+                <div class="productList-product-product-box-text-name" th:text="${productLists.fgProductName}">
                   [Dole] 스위티오 바나나 1kg
                 </div>
-                <div class="productList-product-product-box-text-price">
+                <div class="productList-product-product-box-text-price" th:text="${productLists.fgProductPrice}">
                   5,990원
                 </div>
               </div>
@@ -139,253 +140,17 @@
                 </span>
               </div>
               <div class="productList-product-product-box-eco">
-                <span class="box-span-calender">
+                <span class="box-span-calender" th:text="${#temporals.format(productLists.fgProductExpDate, 'yy.MM.dd')}">
                   <img th:src="@{/img/shopping/productListcalendar.png}" alt="#">
                   24/10/15
                 </span>
-                <span class="box-span-weight">
+                <span class="box-span-weight" th:text="${productLists.fgProductWeight} + 'kg'">
                   <img th:src="@{/img/shopping/productListco2.png}" alt="#">
                   3kg
                 </span>
               </div>
             </div>
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="productList-product-product">-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="productList-product-product">-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="productList-product-product-box" onclick="location.href='productDetail.html'" style="cursor: pointer;">-->
-<!--              <div class="productList-product-product-box-pic">-->
-<!--                <img src="./../../static/img/shopping/banana.png" alt="상품">-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-text">-->
-<!--                <div class="productList-product-product-box-text-name">-->
-<!--                  [Dole] 스위티오 바나나 1kg-->
-<!--                </div>-->
-<!--                <div class="productList-product-product-box-text-price">-->
-<!--                  5,990원-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-star">-->
-<!--                <span>-->
-<!--                  <img src="./../../static/img/shopping/storeListstar.png" alt="star">-->
-<!--                  4.8-->
-<!--                </span>-->
-<!--              </div>-->
-<!--              <div class="productList-product-product-box-eco">-->
-<!--                <span class="box-span-calender">-->
-<!--                  <img src="./../../static/img/shopping/productListcalendar.png" alt="calender">-->
-<!--                  24/10/15-->
-<!--                </span>-->
-<!--                <span class="box-span-weight">-->
-<!--                  <img src="./../../static/img/shopping/productListco2.png" alt="eco">-->
-<!--                  3kg-->
-<!--                </span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
+          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@
       <div class="mypage-user-img">
         <!-- 사용자 이미지 -->
       </div>
-      <div class="user-name" th:text="${user.name}">역삼동 불주먹</div>
+      <div class="user-name" th:text="${user.fgUserName}">역삼동 불주먹</div>
 
       <!-- user 프로필 정보 -->
       <div class="mypage-user-info">
@@ -46,33 +46,15 @@
     <!-- 마이페이지 메뉴 카테고리 -->
     <div class="mypage-side-category">
       <ul>
-        <li class="category-list">
-          <a href="userPurchaseHistory.html">● 상품 구매 내역</a>
-        </li>
-        <li class="category-list">
-          <a href="userMySocialing.html">● MY소셜링</a>
-        </li>
-        <li class="category-list">
-          <a href="userMySharing.html">● My나눔</a>
-        </li>
-        <li class="category-list">
-          <a href="userMyReview.html">● MY리뷰</a>
-        </li>
-        <li class="category-list">
-          <a href="userMyLike.html">● MY좋아요</a>
-        </li>
-        <li class="category-list">
-          <a href="userMyPost.html" class="clicked">● MY게시글</a>
-        </li>
-        <li class="category-list">
-          <a href="userInfoAuth.html">● 회원정보변경</a>
-        </li>
-        <li class="category-list">
-          <a href="userInfoAuth.html">● 비밀번호변경</a>
-        </li>
-        <li class="category-list">
-          <a href="userAdminInquiryList.html">● 관리자 문의</a>
-        </li>
+        <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/review}">● MY리뷰</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/like}">● MY좋아요</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/postEco}" class="clicked">● MY게시글</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/infoauth}">● 회원정보변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
       </ul>
     </div>
   </div>
@@ -97,7 +79,7 @@
           <div class="mypost-info-box">
             <span th:text="${ecoPost.id}">1</span>
             <img th:src="@{/img/mypage/regular/mylikeProductImg.png}" alt="업체 상품 이미지">
-            <span class="eco-title" th:text="${ecoPost.title}">에코프로젝트 인증글</span>
+            <span class="eco-title" th:text="${ecoPost.fgPostTitle}">에코프로젝트 인증글</span>
           </div>
           <div class="detail-btn"><a th:href="@{/community/ecoproject/ecoCertificationDetatil.html(id=${ecoPost.id})}">자세히 보기 &gt;</a></div>
         </div>
@@ -109,7 +91,7 @@
           <div class="mypost-info-box">
             <span th:text="${recipePost.id}">1</span>
             <img th:src="@{/img/mypage/regular/mylikeProductImg.png}" alt="업체 상품 이미지">
-            <span class="receipe-title" th:text="${recipePost.title}">레시피제목</span>
+            <span class="receipe-title" th:text="${recipePost.fgPostTitle}">레시피제목</span>
           </div>
           <div class="detail-btn"><a th:href="@{/community/receipe/receipeDetail.html(id=${recipePost.id})}">자세히 보기 &gt;</a></div>
         </div>
@@ -121,7 +103,7 @@
           <div class="mypost-info-box">
             <span th:text="${freePost.id}">1</span>
             <img th:src="@{/img/mypage/regular/mylikeProductImg.png}" alt="업체 상품 이미지">
-            <span class="free-title" th:text="${freePost.title}">자유게시판제목</span>
+            <span class="free-title" th:text="${freePost.fgPosttitle}">자유게시판제목</span>
           </div>
           <div class="detail-btn"><a th:href="@{/community/free/freeDetail.html(id=${freePost.id})}">자세히 보기 &gt;</a></div>
         </div>

@@ -12,7 +12,7 @@ import lombok.ToString;
 public class NormalInquiryDetailDTO {
     private Long fgUserCode;
     private String fgPostTitle;
-    private String fgPostType;
+//    private String fgPostType;
     private Long fgPostId;
     private String fgNormalNickname;
     private String fgInquiryContent;

@@ -7,6 +7,106 @@ main {
     flex-direction: column;
     align-items: center;
 }
+
+#side-section {
+    width: 250px;
+    height: 100%;
+}
+/* 사이드바 css 여기에  */
+.mypage-list{
+    width: 250px;
+    height: 1000px;
+}
+
+.mypage-user{
+    width: 220px;
+    height: 388px;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    border-color: #dddddd;
+}
+
+.mypage-user-img{
+    width: 220px;
+    height: 220px;
+    background-color: #d9d9d9;
+}
+
+.user-name{
+    font-weight: bold;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.mypage-user-info{
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    margin-top: 20px;
+}
+
+.mypage-user-info-box{
+    margin-bottom: 5px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.mypage-user-info-box img{
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.info-list{
+    margin-left: auto;
+}
+
+.info-list-tree{
+    margin-left: auto;
+    color: #A1B60A;
+    font-weight: bold;
+}
+
+/* 마이페이지 메뉴 카테고리 */
+.mypage-side-category{
+    width: 220px;
+    height: 100%;
+    margin: 20px auto;
+}
+
+.category-list{
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.category-list a{
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+}
+
+.category-list a:hover,
+.category-list a.clicked{
+    background-color:#F8FAE9;
+    color: #CEDD61;
+}
+
+a{
+    text-decoration: none;
+    font-size:17px;
+    color: #6a6a6a;
+    font-weight: bold;
+}
+
+
 /* 게시글 영역 */
 .post-container {
     width: 700px;

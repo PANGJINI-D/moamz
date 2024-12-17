@@ -110,16 +110,31 @@ button{
   height: 1000px;
   /* border: 1px solid blue; */
 }
-.productList-product-product{
-  /* border: 1px solid black; */
+.productList-product-product {
+  /*border: 1px solid black;*/
   display: flex;
-  justify-content: space-between;
-  /* height: 800px; */
+  flex-wrap: wrap; /* 행 넘침을 허용 */
+  justify-content: space-between; /* 가로 간격 균등 분배 */
+  row-gap: 10px; /* 세로 간격 */
+  column-gap: 10px; /* 가로 간격 */
+  width: 100%; /* 컨테이너 너비 설정 */
 }
-.productList-product-product-box{
-  /* border: 1px solid red; */
-  width: 260px;
+
+.productList-product-product-box {
+  /*border: 1px solid red;*/
+  width: 220px;
+  /*height: 200px; !* 고정 높이 *!*/
+  /*margin: 0; !* 불필요한 간격 제거 *!*/
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  margin-bottom: 15px;
 }
+.productList-product-product-box:nth-child(4n+1):last-child {
+  margin-inline-end: auto; /* 마지막 줄 첫 요소 오른쪽 간격 조정 */
+}
+.productList-product-product-box:nth-child(4n+2):last-child {
+  margin-inline-end: auto; /* 두 번째 요소 오른쪽 간격 조정 */
+}
+
 .productList-product-product-box-pic{
   position: relative;
   /*border: 1px solid red;*/
@@ -129,12 +144,12 @@ button{
 }
 .tocart > img{
   position: absolute;
-  bottom: 80px;
-  right: 60px;
+  bottom: 60px;
+  right: 40px;
 }
 
 .productList-product-product-box-pic > img{
-  width: 260px;
+  width: 220px;
   margin-bottom: 8px;
 }
 .productList-product-product-box-text{

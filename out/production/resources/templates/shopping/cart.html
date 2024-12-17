@@ -17,6 +17,8 @@
     <div class="cart-container container">
         <form action="/shop/payment" method="post" id="cartForm">
 
+
+
             <!-- 상단 장바구니 안내 영역 -->
             <div class="cart-wrap1">
                 <div class="cart-top">
@@ -54,7 +56,19 @@
                             </div>
 
                             <!-- 상품 선택 라디오 -->
-                            <input type="radio" name="selectProduct" class="cart-radio">
+                            <input type="radio" name="selectProduct" class="cart-radio" th:value="${cartList.fgProductId}"
+                                   onclick="selectProduct(this)">
+
+                            <input type="hidden" th:id="'productId-' + ${cartList.fgProductId}" th:value="${cartList.fgProductId}">
+                            <input type="hidden" th:id="'productName-' + ${cartList.fgProductId}" th:value="${cartList.fgProductName}">
+                            <input type="hidden" th:id="'productPrice-' + ${cartList.fgProductId}" th:value="${cartList.fgProductPrice}">
+                            <input type="hidden" th:id="'productWeight-' + ${cartList.fgProductId}" th:value="${cartList.fgProductWeight}">
+                            <input type="hidden" th:id="'productExpTime-' + ${cartList.fgProductId}" th:value="${cartList.fgProductExpTime}">
+                            <input type="hidden" th:id="'productFileRoot-' + ${cartList.fgProductId}" th:value="${cartList.productFileRoot}">
+                            <input type="hidden" th:id="'productFileUuid-' + ${cartList.fgProductId}" th:value="${cartList.productFileUuid}">
+                            <input type="hidden" th:id="'productFileName-' + ${cartList.fgProductId}" th:value="${cartList.productFileName}">
+
+
                             <!-- 상품 정보 -->
                             <div class="cart-product-detail-product-intro">
                                 <!-- 상품 이미지 -->
@@ -92,15 +106,17 @@
                                         </span>
                                     </div>
                                 </div>
+<!--                                <input type="hidden" name="productId" id="selectedProductId" th:value="${cartList.fgProductId}">-->
+<!--                                <input type="hidden" name="productName" id="selectedProductName" th:value="${cartList.fgProductName}">-->
+<!--                                <input type="hidden" name="productPrice" id="selectedProductPrice" th:value="${cartList.fgProductPrice}">-->
+<!--                                <input type="hidden" name="productWeight" id="selectedProductWeight" th:value="${cartList.fgProductWeight}">-->
+<!--                                <input type="hidden" name="productQuantity" id="selectedProductQuantity">-->
+<!--                                <input type="hidden" name="productExpTime" id="selectedProductExpTime" th:value="${cartList.fgProductExpTime}">-->
+<!--                                <input type="hidden" name="productFileRoot" id="selectedProductFileRoot" th:value="${cartList.productFileRoot}">-->
+<!--                                <input type="hidden" name="productFileUuid" id="selectedProductFileUuid" th:value="${cartList.productFileUuid}">-->
+<!--                                <input type="hidden" name="productFileName" id="selectedProductFileName" th:value="${cartList.productFileName}">-->
                             </div>
-                            <input type="hidden" name="productId" id="selectedProductId" th:value="${cartList.fgProductId}">
-                            <input type="hidden" name="productName" id="selectedProductName" th:value="${cartList.fgProductName}">
-                            <input type="hidden" name="productPrice" id="selectedProductPrice" th:value="${cartList.fgProductPrice}">
-                            <input type="hidden" name="productWeight" id="selectedProductWeight" th:value="${cartList.fgProductWeight}">
-                            <input type="hidden" name="productExpTime" id="selectedProductExpTime" th:value="${cartList.fgProductExpTime}">
-                            <input type="hidden" name="productFileRoot" id="selectedProductFileRoot" th:value="${cartList.productFileRoot}">
-                            <input type="hidden" name="productFileUuid" id="selectedProductFileUuid" th:value="${cartList.productFileUuid}">
-                            <input type="hidden" name="productFileName" id="selectedProductFileName" th:value="${cartList.productFileName}">
+
 
                             <!-- 수량 조절 버튼 -->
                             <div class="cart-product-count-btn">
@@ -125,6 +141,16 @@
                     </span>
                 </div>
             </div>
+            <!-- 숨겨진 필드: 선택된 상품 정보 저장 -->
+            <input type="hidden" name="productId" id="selectedProductId">
+            <input type="hidden" name="productName" id="selectedProductName">
+            <input type="hidden" name="productPrice" id="selectedProductPrice">
+            <input type="hidden" name="productWeight" id="selectedProductWeight">
+            <input type="hidden" name="productQuantity" id="selectedProductQuantity">
+            <input type="hidden" name="productExpTime" id="selectedProductExpTime">
+            <input type="hidden" name="productFileRoot" id="selectedProductFileRoot">
+            <input type="hidden" name="productFileUuid" id="selectedProductFileUuid">
+            <input type="hidden" name="productFileName" id="selectedProductFileName">
         </form>
     </div>
 </main>

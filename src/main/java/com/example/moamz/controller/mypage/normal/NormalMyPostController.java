@@ -3,6 +3,7 @@ package com.example.moamz.controller.mypage.normal;
 import com.example.moamz.domain.dto.mypage.normal.MyPostEcoDTO;
 import com.example.moamz.domain.dto.mypage.normal.MyPostFreeDTO;
 import com.example.moamz.domain.dto.mypage.normal.MyPostRecipeDTO;
+import com.example.moamz.mapper.mypage.normal.NormalMyPostMapper;
 import com.example.moamz.service.mypage.normal.NormalMyPostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,9 +18,10 @@ import java.util.List;
 public class NormalMyPostController {
 
     private final NormalMyPostService normalMyPostService;
+    private final NormalMyPostMapper normalMyPostMapper;
 
     // 마이페이지 > 에코 프로젝트 게시글 목록
-    @GetMapping("/normal/myPostEco")
+    @GetMapping("/normal/my/postEco")
     public String getMyPostEco(@SessionAttribute(value = "fgUserCode", required = false) Long userCode, Model model) {
         // 세션에 userCode가 없으면 로그인 페이지로 리다이렉트
         if (userCode == null) {
@@ -34,7 +36,7 @@ public class NormalMyPostController {
     }
 
     // 마이페이지 > 레시피 게시글 목록
-    @GetMapping("/mypage/myPostRecipe")
+    @GetMapping("/normal/my/postRecipe")
     public String getMyPostRecipe(@SessionAttribute(value = "fgUserCode", required = false) Long userCode, Model model) {
         // 세션에 userCode가 없으면 로그인 페이지로 리다이렉트
         if (userCode == null) {
@@ -49,7 +51,7 @@ public class NormalMyPostController {
     }
 
     // 마이페이지 > 자유 게시글 목록
-    @GetMapping("/mypage/myPostFree")
+    @GetMapping("/normal/my/postFree")
     public String getMyPostFree(@SessionAttribute(value = "fgUserCode", required = false) Long userCode, Model model) {
         // 세션에 userCode가 없으면 로그인 페이지로 리다이렉트
         if (userCode == null) {

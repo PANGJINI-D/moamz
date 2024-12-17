@@ -13,29 +13,45 @@ window.onload = function() {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    // 초기 카운트 설정
-    let count = 1;
-    const countDisplay = document.getElementById("counting");
-    const incrementButton = document.getElementById("inc");
-    const decrementButton = document.getElementById("dec");
+    document.querySelector('#kakaoPay').addEventListener('click', function () {
+        const productId = document.querySelector('#productId').value;
+        const orderId = document.querySelector('#orderId').value;
+        const orderDetailId = document.querySelector('#orderDetailId').value;
+        const productName = document.querySelector('#productName').value;
+        const productPrice = document.querySelector('#productPrice').value;
+        const productQuantity = document.querySelector('#productQuantity').value;
 
-    // 초기 카운트 표시 설정
-    countDisplay.textContent = count;
-
-    // 증가 버튼 클릭 이벤트
-    incrementButton.addEventListener("click", () => {
-        count += 1;
-        countDisplay.textContent = count;
-    });
-
-    // 감소 버튼 클릭 이벤트
-    decrementButton.addEventListener("click", () => {
-        if (count > 1) {
-            count -= 1;
-            countDisplay.textContent = count;
-        } else {
-            alert("수량은 1 이하로 설정할 수 없습니다."); // 경고창 표시
-        }
+        // 서버로 데이터 전송
+        $.ajax({
+            type: 'POST',
+            url: '/kakao/pay',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                fgOrderId: orderId,
+                fgPaymentStatus: "결제중",
+                fgOrderQuantity: productQuantity,
+                fgOrderPerPrice: productPrice,
+                fgOrderTax: 0,
+                fgOrderUserPoint: 0,
+                fgOrderAmount: productPrice * productQuantity,
+                fgProductName: productName,
+                fgProductId: productId
+            }),
+            success: function (response) {
+                if (response.next_redirect_pc_url) {
+                    window.location.href = response.next_redirect_pc_url; // 결제 페이지로 이동
+                } else {
+                    alert('결제 요청 중 오류가 발생했습니다.');
+                }
+            },
+            error: function (error) {
+                console.error('결제 요청 실패:', error);
+            }
+        });
     });
 });
+
+
+
+
 

@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MyLikeEcoMapper {
-    List<MyLikeEcoDTO> selectMyLiKeEco();
+    List<MyLikeEcoDTO> selectMyLikeEco(Long fgUserCode);
 }

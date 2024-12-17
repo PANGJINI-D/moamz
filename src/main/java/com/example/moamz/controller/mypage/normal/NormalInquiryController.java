@@ -23,10 +23,9 @@ public class NormalInquiryController {
 
     // 문의글 등록 페이지 열기
     @GetMapping("/regist")
-    public String regist(@SessionAttribute(value = "fgUserCode", required = false) String fgUserCode, Model model) {
+    public String regist(@SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode, Model model) {
         // 세션에 userCode가 null이면 로그인 페이지로 리다이렉트
-        return fgUserCode == null ? "redirect:/normal/regular/userLogin" :
-                "mypage/regular/userAdminInquiryWrite";
+        return fgUserCode == null ? "redirect:/normal/regular/userLogin" : "mypage/regular/userAdminInquiryWrite";
 
     }
 
@@ -56,6 +55,11 @@ public class NormalInquiryController {
     public String regist(NormalInquiryWriteDTO normalInquiryWriteDTO,
                          @SessionAttribute(value = "fgUserCode", required = false) Long fgUserCode,
                          RedirectAttributes redirectAttributes) {
+        // 세션의 사용자 코드 설정
+        if(fgUserCode == null){
+            return "redirect:/normal/regular/userLogin";
+        }
+
         // 세션의 fgUserCode를 DTO에 넣기
         normalInquiryWriteDTO.setFgUserCode(fgUserCode);
 
@@ -64,12 +68,13 @@ public class NormalInquiryController {
 
         // 제대로 설정되었는지 확인
         if (normalInquiryWriteDTO.getFgPostId() != null) {
-            System.out.println("👌boardId가 설정되었습니다 : " + normalInquiryWriteDTO.getFgPostId());
+            System.out.println("👌fgPostId가 설정되었습니다 : " + normalInquiryWriteDTO.getFgPostId());
             return "redirect:/normal/inquiry/detail/" + normalInquiryWriteDTO.getFgPostId();
 //            redirectAttributes.addFlashAttribute("fgPostId", normalInquiryWriteDTO.getFgPostId());
         } else {
             System.out.println("😒오류 : normalInquiryWriteDTO.getfgPostId()가 서비스 호출 후 null입니다");
             // 오류 발생시 -> 리다이렉트
+            redirectAttributes.addFlashAttribute("errorMessage", "문의글 등록에 실패했습니다.");
             return "redirect:/normal/inquiry/list";
         }
 

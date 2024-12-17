@@ -28,8 +28,9 @@
             <div class="post-title" th:text="${socialingDetail.fgPostTitle}">우리 함께 모여 저녁식사 어때요?</div>
             <div class="user-info-wrap">
                 <div class="host-box">
-                    <img th:src="@{'/upload_moamz/' + ${socialingDetail.userFileRoot} + '/' + ${socialingDetail.userFileUuid}
-                                                + '_' + ${socialingDetail.userFileName}}">
+<!--                    <img th:src="@{'/upload_moamz/' + ${socialingDetail.userFileRoot} + '/' + ${socialingDetail.userFileUuid}-->
+<!--                                                + '_' + ${socialingDetail.userFileName}}">-->
+                    <img th:src="@{/img/community/profile.png}">
                     <span class="user-nickname" th:text="${socialingDetail.fgNormalName}">역삼동불주먹</span>
                 </div>
                 <div class="socialinginfo-and-chat">

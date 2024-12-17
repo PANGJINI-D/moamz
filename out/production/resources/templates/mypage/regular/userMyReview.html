@@ -6,249 +6,95 @@
   <title>UserMySocialing</title>
   <link rel="stylesheet" th:href="@{/css/mypage/regular/userMyReview.css}">
   <link rel="stylesheet" th:href="@{/css/reset2.css}">
-  <!-- <script defer src="../../../static/js/mypage/regular/userMyReview.js"></script> -->
 </head>
 <body>
 <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
-  <main>
-    <div class="mypage-list">
-      <div class="mypage-user">
-        <div class="mypage-user-img">
-        </div>
-        <div class="user-name">역삼동 불주먹</div>
-
-        <!-- user 프로필 정보 -->
-        <div class="mypage-user-info">
-          <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserPointIcon.png" alt="포인트 아이콘">
-            <span>포인트</span>
-            <span class="info-list">1,000</span>
-          </div>
-          <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserFoodIcon.png" alt="포인트 아이콘">
-            <span>구해준 음식물</span>
-            <span class="info-list">7.333kg</span>
-          </div>
-          <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserCo2Icon.png" alt="포인트 아이콘">
-            <span>탄소감축량</span>
-            <span class="info-list">18.25kg</span>
-          </div>
-          <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserTreeIcon.png" alt="포인트 아이콘">
-            <span>내가 심은 나무</span>
-            <span class="info-list-tree">1 그루</span>
-          </div>
-        </div>
+<main>
+  <div class="mypage-list">
+    <div class="mypage-user">
+      <div class="mypage-user-img">
       </div>
+      <div class="user-name" th:text="${normalProfileDTO.fgNormalNickname}">역삼동 불주먹</div>
 
-      <!-- 마이페이지 메뉴 카테고리 -->
-      <div class="mypage-side-category">
-        <ul>
-            <li class="category-list">
-              <a href="userPurchaseHistory.html">● 상품 구매 내역</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySocialing.html">● MY소셜링</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySharing.html">● My나눔</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyReview.html" class="clicked">● MY리뷰</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyLike.html">● MY좋아요</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyPost.html">● MY게시글</a>
-            </li>
-            <li class="category-list">
-              <a href="userInfoModify.html">● 회원정보변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userResetPassword.html">● 비밀번호변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userAdminInquiryList.html">● 관리자 문의</a>
-            </li>
-        </ul>
+      <!-- user 프로필 정보 -->
+      <div class="mypage-user-info">
+        <div class="mypage-user-info-box">
+          <img th:src="@{/static/img/mypage/regular/mypageUserPointIcon.png}" alt="포인트 아이콘">
+          <span>포인트</span>
+          <span class="info-list" th:text="${normalProfileDTO.fgPointTotal}">1,000</span>
+        </div>
+        <div class="mypage-user-info-box">
+          <img th:src="@{/static/img/mypage/regular/mypageUserFoodIcon.png}" alt="구해준 음식물">
+          <span>구해준 음식물</span>
+          <span class="info-list" th:text="${#numbers.formatDecimal(normalProfileDTO.totalWeightToKg, 1, 2)}">7.333kg</span>
+        </div>
+        <div class="mypage-user-info-box">
+          <img th:src="@{/static/img/mypage/regular/mypageUserCo2Icon.png}" alt="탄소감축량">
+          <span>탄소감축량</span>
+          <span class="info-list" th:text="${#numbers.formatDecimal(normalProfileDTO.carbonReduction, 1, 2)}">18.25kg</span>
+        </div>
+        <div class="mypage-user-info-box">
+          <img th:src="@{/static/img/mypage/regular/mypageUserTreeIcon.png}" alt="내가 심은 나무">
+          <span>내가 심은 나무</span>
+          <span class="info-list-tree" th:text="${#numbers.formatDecimal(normalProfileDTO.treeCount, 1, 2)}">1 그루</span>
+        </div>
       </div>
     </div>
-    <!-- 내가 작성한 업체 리뷰  -->
+
+    <!-- 마이페이지 메뉴 카테고리 -->
+    <div class="mypage-side-category">
+      <ul>
+        <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/review}" class="clicked">● MY리뷰</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/like}">● MY좋아요</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/postEco}">● MY게시글</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/infoauth}">● 회원정보변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
+      </ul>
+    </div>
+  </div>
+
+    <!-- 내가 작성한 업체 리뷰 -->
     <div class="userMyReview-wrap">
       <div class="userMyReview-list-box">
         <div class="userMyReview-title">
-          <img src="../../../static/img/mypage/regular/myreviewImg.png" alt="리뷰 이미지">
+          <img th:src="@{/static/img/mypage/regular/myreviewImg.png}" alt="리뷰 이미지">
           <span>내가 작성한 업체 리뷰</span>
         </div>
-        <!-- 리뷰 -->
+
+        <!-- 리뷰 목록 반복 출력 -->
         <div class="userMyReview-info">
-          <div class="userMyReview-info-list">
+          <div th:each="review : ${normalMyReview}" class="userMyReview-info-list">
             <div class="myreview-list-wrap">
               <div class="myreview-count">
-                <span>1</span>
+                <span th:text="${review.id}">1</span>
               </div>
               <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
+                <p class="store-name" th:text="${review.fgBusinessName}">업체명</p>
+                <p th:text="${review.fgReviewContent}">사장님 대박 친절 방토가 너무 신선해요~~</p>
                 <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
+                  <span th:text="${review.fgProductName}">방울토마토 500g</span>
                 </div>
               </div>
             </div>
             <div class="myreview-star-date">
               <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
-              </div>
-            </div>
-          </div>
-          <div class="userMyReview-info-list">
-            <div class="myreview-list-wrap">
-              <div class="myreview-count">
-                <span>1</span>
-              </div>
-              <div class="myreview-store-info">
-                <p class="store-name">업체명</p>
-                <p>사장님 대박 친절 방토가 너무 신선해요~~</p>
-                <div class="myreview-purchase-item">
-                  <span>방울토마토 500g</span>
-                </div>
-              </div>
-            </div>
-            <div class="myreview-star-date">
-              <div class="myreview-star-date-box">
-                <span class="myreview-star">5.0</span>
-                <span>2024/10/01</span>
+                <span class="myreview-star" th:text="${review.fgReviewRating}">5.0</span>
+                <span th:text="${review.fgReviewCreatedAt}">2024/10/01</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
+
 <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </html>

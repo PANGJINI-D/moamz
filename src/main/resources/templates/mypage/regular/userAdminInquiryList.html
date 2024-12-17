@@ -46,35 +46,17 @@
           
                 <!-- 마이페이지 메뉴 카테고리 -->
                 <div class="mypage-side-category">
-                  <ul>
-                      <li class="category-list">
-                        <a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● MY소셜링</a>
-                      </li>
-                      <li class="category-list">
-                        <a th:href="@{/normal/my/sharing/completed}">● My나눔</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● MY리뷰</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● MY좋아요</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● MY게시글</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● 회원정보변경</a>
-                      </li>
-                      <li class="category-list">
-                        <a href="#">● 비밀번호변경</a>
-                      </li>
-                      <li class="category-list">
-                        <a th:href="@{/normal/inquiry/list}" class="clicked">● 관리자 문의</a>
-                      </li>
-                  </ul>
+                    <ul>
+                        <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/review}">● MY리뷰</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/like}">● MY좋아요</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/postEco}">● MY게시글</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/infoauth}">● 회원정보변경</a></li>
+                        <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+                        <li class="category-list"><a th:href="@{/normal/inquiry/list}" class="clicked">● 관리자 문의</a></li>
+                    </ul>
                 </div>
               </div>
         </section>
@@ -89,7 +71,7 @@
             <!-- 문의내역 리스트 -->
             <div class="inquiry-list-container">
                 <ul>
-                    <li th:each="inquiry, iterStat: ${NormalInquiryList}" class="inquiry-list">
+                    <li th:each="inquiry, iterStat: ${normalInquiryList}" class="inquiry-list">
                         <div class="inquiry-number" th:text="${iterStat.index + 1}">1</div>
                         <a th:href="@{/normal/inquiry/detail/{fgPostId}(fgPostId=${inquiry.fgPostId})}" class="inquiry-title"
                         th:text="${inquiry.fgPostTitle}">사장님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ고객님이 연락두절 되었는데 어떻게 해야하나요?ㅠㅠ</a>
@@ -97,7 +79,7 @@
                         <!-- 답변상태 -->
                         <div class="status-wrap">
                             <div th:class="${inquiry.fgInquiryStatus == '답변완료' ? 'inquiry-status completed' : 'hidden'}">답변완료</div>
-                            <div th:class="${inquiry.inquiryStatus == '확인중' ? 'inquiry-status unanswered' : 'hidden'}">확인중</div>
+                            <div th:class="${inquiry.fgInquiryStatus == '확인중' ? 'inquiry-status unanswered' : 'hidden'}">확인중</div>
                         </div>
                     </li>
                 </ul>

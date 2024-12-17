@@ -19,19 +19,9 @@ public class ProductService {
         return productMapper.productList();
     }
 
-    // 주문 등록
-    public void makeOrder(OrderDTO orderDTO) {
-        productMapper.insertOrder(orderDTO);
-    }
-    
     // 결제 상태 업데이트
     public void orderPayment(OrderUpdateDTO orderUpdateDTO) {
         productMapper.updataOrderPaymentStatus(orderUpdateDTO);
-    }
-
-    // 주문 상세 추가
-    void addOrderDetail(OrderDetailDTO orderDetailDTO) {
-        productMapper.insertOrderDetail(orderDetailDTO);
     }
 
     // 픽업 추가
@@ -72,5 +62,29 @@ public class ProductService {
     // cartDetail에서 delete
     public void removeCartDetail(Long cartDetailId) {
         productMapper.deleteCart(cartDetailId);
+    }
+
+    public Long payOrderId(){
+        return productMapper.selectOrderId();
+    }
+
+    public Long payOrderDetailId(){
+        return productMapper.selectOrderDetailId();
+    }
+
+    public OrderDTO getOrderByOrderCode(Long orderCode) {
+        return productMapper.getOrderByOrderCode(orderCode);
+    }
+
+    public OrderDTO getLatestOrder(){
+        return productMapper.getLatestOrder();
+    }
+
+    public void approveOrder(){
+        productMapper.approveOrder();
+    }
+
+    public ProductShopDetailDTO showProduct(Long fgProductId) {
+        return productMapper.showProduct(fgProductId);
     }
 }

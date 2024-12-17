@@ -47,7 +47,7 @@
   <div class="main-eco">
     <div class="eco-title">
       <img th:src="@{/img/main/main/main-eco.png}" alt="힘자랑">
-      <span><a th:href="@{/ecoproject/list}">HOT 지구를 위한 에코 프로젝트</a></span>
+      <span><a th:href="@{/ecoproject/projectList}">HOT 지구를 위한 에코 프로젝트</a></span>
     </div>
     <div class="eco-project" >
       <div class="eco-card" th:each="eco : ${mainEcoList}" onclick="location.href=`/ecoproject/ecoCertList/{fgPostId}`">
@@ -78,7 +78,7 @@
   <div class="main-recipe">
     <div class="recipe-title">
       <img th:src="@{/img/main/main/main-recipe.png}" alt="요리사">
-      <span><a th:href="@{/community/receipe/receipeList.html}">나도 자취왕! 인기 레시피</a></span>
+      <span><a th:href="@{/recipe/list}">나도 자취왕! 인기 레시피</a></span>
     </div>
     <div class="recipe-wrap" >
       <div class="recipe-card">
@@ -104,36 +104,85 @@
     </div>
   </div>
 
-
   <div class="main-socialing">
     <div class="socialing-title">
       <img th:src="@{/img/main/main/main-socialing.png}" alt="전구">
-      <span><a th:href="@{/community/socialing/socialingList.html}">최근 개설된 소셜링, 참여해봐요!</a></span>
+      <span><a href=#>최근 개설된 소셜링, 참여해봐요!</a></span>
     </div>
-    <div class="socialing-wrap" >
-      <div class="socialing-card" th:each="socialing : ${mainSocialingList}">
+    <div class="socialing-wrap">
+      <div class="socialing-card">
         <div class="socialing-card-img">
-<!--          <img th:src="@{/img/main/main/socialingCardImg.png}" alt="소셜링 카드 이미지">-->
-          <img th:src="'/upload_moamz/' + ${socialing.fgPostFileRoot} + '/' + ${socialing.fgPostFileUuid} + '_' + ${socialing.fgPostFileName}" alt="소셜링 사진"/>
+          <img th:src="@{/img/main/main/socialingCardImg.png}" alt="소셜링 카드 이미지">
         </div>
         <div class="socialing-info">
-          <h5 th:text="${socialing.fgPostTitle}">함께 떠들어요^^</h5>
+          <h5>함께 떠들어요^^</h5>
           <p><img th:src="@{/img/main/main/dateIcon.png}" alt="소셜링 날짜">
-            <span th:text="${socialing.fgSocialingStart} + ' ~ ' + ${socialing.fgSocialingEnd}">2024/10/8 - 2024/11/10</span><br>
+            2024/11/25 - 2024/12/10<br>
             <img th:src="@{/img/main/main/peopleIcon.png}" alt="소셜링 인원수">
-            <span th:text="${socialing.fgSocialingMaxParticipants}">2/8</span></p>
+            2/8</p>
           <div class="socialing-box">
             <div class="socialing-box-age">
-              <span th:text="${socialing.fgSocialingMinAge} + '-' + ${socialing.fgSocialingMaxAge}">20-30대</span>
+              <span>20-30대</span>
             </div>
             <div class="socialing-box-age">
-              <span th:text="${socialing.fgSocialingGenderRes}">성별무관</span>
+              <span>성별무관</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="socialing-card">
+        <div class="socialing-card-img">
+          <img th:src="@{/img/main/main/socialingCardImg2.png}" alt="소셜링 카드 이미지">
+        </div>
+        <div class="socialing-info">
+          <h5>다함께 요가!</h5>
+          <p><img th:src="@{/img/main/main/dateIcon.png}" alt="소셜링 날짜">
+            2024/11/27 - 2024/12/25<br>
+            <img th:src="@{/img/main/main/peopleIcon.png}" alt="소셜링 인원수">
+            2/8</p>
+          <div class="socialing-box">
+            <div class="socialing-box-age">
+              <span>20-30대</span>
+            </div>
+            <div class="socialing-box-age">
+              <span>여자만</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+
+<!--  <div class="main-socialing">-->
+<!--    <div class="socialing-title">-->
+<!--      <img th:src="@{/img/main/main/main-socialing.png}" alt="전구">-->
+<!--      <span><a th:href="@{/community/socialing/socialingList.html}">최근 개설된 소셜링, 참여해봐요!</a></span>-->
+<!--    </div>-->
+<!--    <div class="socialing-wrap" >-->
+<!--      <div class="socialing-card" th:each="socialing : ${mainSocialingList}">-->
+<!--        <div class="socialing-card-img">-->
+<!--&lt;!&ndash;          <img th:src="@{/img/main/main/socialingCardImg.png}" alt="소셜링 카드 이미지">&ndash;&gt;-->
+<!--          <img th:src="'/upload_moamz/' + ${socialing.fgPostFileRoot} + '/' + ${socialing.fgPostFileUuid} + '_' + ${socialing.fgPostFileName}" alt="소셜링 사진"/>-->
+<!--        </div>-->
+<!--        <div class="socialing-info">-->
+<!--          <h5 th:text="${socialing.fgPostTitle}">함께 떠들어요^^</h5>-->
+<!--          <p><img th:src="@{/img/main/main/dateIcon.png}" alt="소셜링 날짜">-->
+<!--            <span th:text="${socialing.fgSocialingStart} + ' ~ ' + ${socialing.fgSocialingEnd}">2024/10/8 - 2024/11/10</span><br>-->
+<!--            <img th:src="@{/img/main/main/peopleIcon.png}" alt="소셜링 인원수">-->
+<!--            <span th:text="${socialing.fgSocialingMaxParticipants}">2/8</span></p>-->
+<!--          <div class="socialing-box">-->
+<!--            <div class="socialing-box-age">-->
+<!--              <span th:text="${socialing.fgSocialingMinAge} + '-' + ${socialing.fgSocialingMaxAge}">20-30대</span>-->
+<!--            </div>-->
+<!--            <div class="socialing-box-age">-->
+<!--              <span th:text="${socialing.fgSocialingGenderRes}">성별무관</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </main>
 <footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 

@@ -2,6 +2,7 @@ package com.example.moamz.controller.shopping;
 
 import com.example.moamz.domain.dto.shopping.CartDTO;
 import com.example.moamz.domain.dto.shopping.CartDetailDTO;
+import com.example.moamz.domain.dto.shopping.ProductShopDetailDTO;
 import com.example.moamz.domain.dto.shopping.ProductListMainDTO;
 import com.example.moamz.service.shopping.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,15 @@ public class ShopController {
         return "shopping/productList";
     }
 
+    @GetMapping("/detail/{fgProductId}")
+    public String productDetail(@PathVariable("fgProductId") Long fgProductId, Model model){
+        ProductShopDetailDTO prodcutDetail = productService.showProduct(fgProductId);
+
+        model.addAttribute("prodcutDetail", prodcutDetail);
+
+        return "shopping/productDetail";
+    }
+
     @GetMapping("/cart")
     public String cart(Model model){
         Long sampleUserCode = 1L;
@@ -49,6 +59,7 @@ public class ShopController {
                                  @RequestParam("productName") String productName,
                                  @RequestParam("productPrice") Integer productPrice,
                                  @RequestParam("productWeight") Double productWeight,
+                                 @RequestParam("productQuantity") int productQuantity,
                                  @RequestParam("productExpTime") LocalDateTime productExpTime,
                                  @RequestParam("productFileRoot") String productFileRoot,
                                  @RequestParam("productFileUuid") String productFileUuid,
@@ -56,9 +67,16 @@ public class ShopController {
                                  RedirectAttributes redirectAttributes) {
         // RedirectAttributes로 데이터 전달
         System.out.println("productId = " + productId);
+
+       Long orderId = productService.payOrderId();
+       Long orderDetailId = productService.payOrderDetailId();
+
+        redirectAttributes.addFlashAttribute("orderId", orderId);
+        redirectAttributes.addFlashAttribute("orderDetailId", orderDetailId);
         redirectAttributes.addFlashAttribute("productId", productId);
         redirectAttributes.addFlashAttribute("productName", productName);
         redirectAttributes.addFlashAttribute("productPrice", productPrice);
+        redirectAttributes.addFlashAttribute("productQuantity", productQuantity);
         redirectAttributes.addFlashAttribute("productWeight", productWeight);
         redirectAttributes.addFlashAttribute("productExpTime", productExpTime);
         redirectAttributes.addFlashAttribute("productFileRoot", productFileRoot);

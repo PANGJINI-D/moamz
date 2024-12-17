@@ -4,40 +4,41 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UserMySocialing</title>
-  <link rel="stylesheet" href="../../../static/css/mypage/regular/userMyLike.css">
-  <link rel="stylesheet" href="../../../static/css/reset2.css">
-  <script defer src="../../../static/js/mypage/regular/userMyLike.js"></script>
+  <link rel="stylesheet" th:href="@{/css/mypage/regular/userMyLike.css}">
+  <link rel="stylesheet" th:href="@{/css/reset2.css}">
+  <script th:inline="javascript" src="@{/js/mypage/regular/userMyLike.js}"></script>
 </head>
 <body>
-  <header id="header"></header>
-  <main>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
+<main>
+  <!-- 사이드바 영역 -->
+  <section id="side-section">
     <div class="mypage-list">
       <div class="mypage-user">
-        <div class="mypage-user-img">
-        </div>
+        <div class="mypage-user-img"></div>
         <div class="user-name">역삼동 불주먹</div>
 
         <!-- user 프로필 정보 -->
         <div class="mypage-user-info">
           <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserPointIcon.png" alt="포인트 아이콘">
+            <img th:src="@{/img/mypage/regular/mypageUserPointIcon.png}" alt="포인트 아이콘">
             <span>포인트</span>
-            <span class="info-list">1,000</span>
+            <span class="info-list" th:text="${user.point}"></span>
           </div>
           <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserFoodIcon.png" alt="포인트 아이콘">
+            <img th:src="@{/img/mypage/regular/mypageUserFoodIcon.png}" alt="구해준 음식물 아이콘">
             <span>구해준 음식물</span>
-            <span class="info-list">7.333kg</span>
+            <span class="info-list" th:text="${user.foodWeight}"></span>kg
           </div>
           <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserCo2Icon.png" alt="포인트 아이콘">
+            <img th:src="@{/img/mypage/regular/mypageUserCo2Icon.png}" alt="탄소감축량 아이콘">
             <span>탄소감축량</span>
-            <span class="info-list">18.25kg</span>
+            <span class="info-list" th:text="${user.co2Reduction}"></span>kg
           </div>
           <div class="mypage-user-info-box">
-            <img src="../../../static/img/mypage/regular/mypageUserTreeIcon.png" alt="포인트 아이콘">
+            <img th:src="@{/img/mypage/regular/mypageUserTreeIcon.png}" alt="내가 심은 나무 아이콘">
             <span>내가 심은 나무</span>
-            <span class="info-list-tree">1 그루</span>
+            <span class="info-list-tree" th:text="${user.treeCount}"></span> 그루
           </div>
         </div>
       </div>
@@ -45,384 +46,79 @@
       <!-- 마이페이지 메뉴 카테고리 -->
       <div class="mypage-side-category">
         <ul>
-            <li class="category-list">
-              <a href="userPurchaseHistory.html">● 상품 구매 내역</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySocialing.html">● MY소셜링</a>
-            </li>
-            <li class="category-list">
-              <a href="userMySharing.html">● My나눔</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyReview.html">● MY리뷰</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyLike.html"  class="clicked">● MY좋아요</a>
-            </li>
-            <li class="category-list">
-              <a href="userMyPost.html">● MY게시글</a>
-            </li>
-            <li class="category-list">
-              <a href="userInfoAuth.html">● 회원정보변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userInfoAuth.html">● 비밀번호변경</a>
-            </li>
-            <li class="category-list">
-              <a href="userAdminInquiryList.html">● 관리자 문의</a>
-            </li>
+          <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/sharing/completed}">● My나눔</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/review}">● MY리뷰</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/like}" class="clicked">● MY좋아요</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/postEco}">● MY게시글</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/infoauth}">● 회원정보변경</a></li>
+          <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+          <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
         </ul>
       </div>
     </div>
+  </section>
 
-    <!-- 내가 누른 좋아요  -->
-    <div class="userMyLike-list">
-      <div class="userMyLike-list-box">
-        <div class="userMyLike-title">
-          <img src="../../../static/img/mypage/regular/userMyLikeImg.png" alt="좋아요 이미지">
-          <span>내가 누른 좋아요</span>
+  <!-- 내가 누른 좋아요  -->
+  <div class="userMyLike-list">
+    <div class="userMyLike-list-box">
+      <div class="userMyLike-title">
+        <img th:src="@{/img/mypage/regular/userMyLikeImg.png}" alt="좋아요 이미지">
+        <span>내가 누른 좋아요</span>
+      </div>
+      <!-- 좋아요 카테고리 -->
+      <div class="mylike-category">
+        <div class="category-btn active" th:classappend="${#lists.contains(activeCategory, 'store') ? 'active' : ''}" id="mylike-store-btn">업체</div>
+        <div class="category-btn" th:classappend="${#lists.contains(activeCategory, 'eco') ? 'active' : ''}" id="mylike-eco-btn">에코프로젝트</div>
+        <div class="category-btn" th:classappend="${#lists.contains(activeCategory, 'recipe') ? 'active' : ''}" id="mylike-receipe-btn">레시피</div>
+        <div class="category-btn" th:classappend="${#lists.contains(activeCategory, 'free') ? 'active' : ''}" id="mylike-free-btn">자유게시판</div>
+      </div>
+      <!-- 업체 목록 -->
+      <div class="mylike-store-list">
+        <div class="mylike-info-list" th:each="product : ${user.likedProducts}">
+          <div class="mylike-product-info">
+            <span th:text="${#numbers.hasText(product.index) ? product.index : ''}">1</span>
+            <img th:src="@{'/static/img/mypage/regular/' + product.image}" alt="업체 상품 이미지">
+            <span class="store-title" th:text="${product.title}"></span>
+          </div>
+          <div id="detail-btn"><a th:href="@{'/shopping/storeDetailMain.html'}">자세히 보기 &gt;</a></div>
         </div>
-        <!-- 좋아요 카테고리 -->
-        <div class="mylike-category">
-          <div class="category-btn active" id="mylike-store-btn">업체</div>
-          <div class="category-btn" id="mylike-eco-btn">에코프로젝트</div>
-          <div class="category-btn" id="mylike-receipe-btn">레시피</div>
-          <div class="category-btn" id="mylike-free-btn">자유게시판</div>
+      </div>
+      <!-- 에코프로젝트 목록 -->
+      <div class="mylike-eco-list hidden">
+        <div class="mylike-info-list" th:each="project : ${user.likedEcoProjects}">
+          <div class="mylike-project-info">
+            <span th:text="${#numbers.hasText(project.index) ? project.index : ''}">1</span>
+            <img th:src="@{'../../../static/img/mypage/regular/' + project.image}" alt="프로젝트 이미지">
+            <span class="store-title" th:text="${project.title}"></span>
+          </div>
+          <div id="detail-btn-eco"><a th:href="@{'/community/ecoproject/ecoCertificationDetatil.html'}">자세히 보기 &gt;</a></div>
         </div>
-        <!-- 업체 목록 -->
-        <div class="mylike-store-list">
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
+      </div>
+      <!-- 레시피 목록 -->
+      <div class="mylike-receipe-list hidden">
+        <div class="mylike-info-list" th:each="recipe : ${user.likedRecipes}">
+          <div class="mylike-receipe-info">
+            <span th:text="${#numbers.hasText(recipe.index) ? recipe.index : ''}">1</span>
+            <img th:src="@{'/static/img/mypage/regular/' + recipe.image}" alt="레시피 이미지">
+            <span class="store-title" th:text="${recipe.title}"></span>
           </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">업체명</span>
-            </div>
-            <div id="detail-btn"><a href="../../shopping/storeDetailMain.html">자세히 보기 &gt;</a></div>
-          </div>
-
+          <div id="detail-btn-receipe"><a th:href="@{'/community/receipe/receipeDetail.html'}">자세히 보기 &gt;</a></div>
         </div>
-        <!-- 에코프로젝트 목록 -->
-        <div class="mylike-eco-list hidden">
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
+      </div>
+      <!-- 자유게시판 목록 -->
+      <div class="mylike-free-list hidden">
+        <div class="mylike-info-list" th:each="post : ${user.likedFreePosts}">
+          <div class="mylike-product-info">
+            <span th:text="${#numbers.hasText(post.index) ? post.index : ''}">1</span>
+            <span class="store-title" th:text="${post.title}"></span>
           </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-project-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">프로젝트명</span>
-            </div>
-            <div id="detail-btn-eco"><a href="../../community/ecoproject/ecoCertificationDetatil.html">자세히 보기 &gt;</a></div>
-          </div>
-        </div>
-        <!-- 레시피 목록 -->
-        <div class="mylike-receipe-list hidden">
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-receipe-info">
-              <span>1</span>
-              <img src="../../../static/img/mypage/regular/mylikeProductImg.png" alt="업체 상품 이미지">
-              <span class="store-title">레시피명</span>
-            </div>
-            <div id="detail-btn-receipe"><a href="../../community/receipe/receipeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-        </div>
-        <!-- 자유게시판 목록 -->
-        <div class="mylike-free-list hidden">
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
-          <div class="mylike-info-list">
-            <div class="mylike-product-info">
-              <span>1</span>
-              <span class="store-title">자유게시판 제목</span>
-            </div>
-            <div id="detail-btn"><a href="../../community/free/freeDetail.html">자세히 보기 &gt;</a></div>
-          </div>
+          <div id="detail-btn"><a th:href="@{'/community/free/freeDetail.html'}">자세히 보기 &gt;</a></div>
         </div>
       </div>
     </div>
-  </main>
-  <footer id="footer"></footer>
+  </div>
+</main>
 </body>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

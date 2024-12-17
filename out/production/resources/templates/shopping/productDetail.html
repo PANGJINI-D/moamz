@@ -4,64 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2f79c59b6071fb92267e232c13fea51f&libraries=services"></script>
-    <script src="./../../static/js/shopping/produceDetail.js"></script>
-    <link rel="stylesheet" href="./../../static/css/reset.css">
-    <link rel="stylesheet" href="./../../static/css/shopping/productDetail.css">
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=6c263a566abdc8418b204d2062452eca&libraries=services"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <script th:src="@{/js/shopping/produceDetail.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/shopping/productDetail.css}">
 </head>
 <body>
 <header id="header" th:replace="~{/main/fragment/header/userHeaderLogin}"></header>
     <div class="productDetail-container container">
+        <form action="/shop/payment" method="post" id="cartForm">
+            <input type="hidden" name="productId" id="selectedProductId" th:value="${prodcutDetail.fgProductId}">
+            <input type="hidden" name="productName" id="selectedProductName" th:value="${prodcutDetail.fgProductName}">
+            <input type="hidden" name="productPrice" id="selectedProductPrice" th:value="${prodcutDetail.fgProductPrice}">
+            <input type="hidden" name="productWeight" id="selectedProductWeight" th:value="${prodcutDetail.fgProductWeight}">
+            <input type="hidden" name="productQuantity" id="selectedProductQuantity" th:value="${prodcutDetail.fgProductStock}">
+            <input type="hidden" name="productExpTime" id="selectedProductExpTime" th:value="${prodcutDetail.fgProductExpDate}">
+            <input type="hidden" name="productFileRoot" id="selectedProductFileRoot" th:value="${prodcutDetail.productFileRoot}">
+            <input type="hidden" name="productFileUuid" id="selectedProductFileUuid" th:value="${prodcutDetail.productFileUuid}">
+            <input type="hidden" name="productFileName" id="selectedProductFileName" th:value="${prodcutDetail.productFileName}">
         <div class="productDetail-wrap1">
             <div class="productDetail-product">
                 <div class="productDetail-product-img">
-                    <img src="./../../static/img/shopping/abocadoBig.png" alt="">
-                    <div class="productDetail-product-lt">&lt;</div>
-                    <div class="productDetail-product-gt">&gt;</div>
+                    <img th:src="@{/img/shopping/abocadoBig.png}" alt="">
                 </div>
                 <div class="productDetail-product-count">
-                    <div class="productDetail-product-count-name">
+                    <div class="productDetail-product-count-name" th:text="${prodcutDetail.fgProductName}">
                         [Dole] 아보카도 1kg
                     </div>
                     <div class="productDetail-product-count-count">
-                        <!-- <div class="productDetail-product-count-btn">
-                            <button type="button" id="inc">+</button>
-                            <div class="productDetail-product-count-num">
-                                1
-                            </div>
-                            <button type="button" id="dec">-</button>
-                        </div> -->
-                        <div class="payment-product-count-btn">
-                            <button type="button" id="inc">+</button>
-                            <div class="payment-product-count-num">
-                                1
-                            </div>
-                            <button type="button" id="dec">-</button>
-                        </div>
-                        <span>9,900원</span>
+                        <span th:text="${prodcutDetail.fgProductPrice} + '원'">9,900원</span>
                     </div>
                     <div class="productDetail-product-price">
                         <span>
                             총 상품금액: 
-                            <div class="productDetail-product-total">9,900원</div>
+                            <div class="productDetail-product-total" th:text="${prodcutDetail.fgProductPrice} + '원'">9,900원</div>
                         </span>
                     </div>
                 </div>
             </div>
             <div class="productDetail-detail">
                 <div class="productDetail-detail-top">
-                    <div class="productDetail-detail-top-name">
+                    <div class="productDetail-detail-top-name" th:text="${prodcutDetail.fgProductName}">
                         [Dole] 아보카도
                     </div>
                     <div class="productDetail-detail-top-eco">
                         <span>
                             <div class="productDetail-detail-top-calendar">
-                                <img src="./../../static/img/shopping/productListcalendar.png" alt="">
-                                24.10.15
+                                <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
+                                <span  th:text="${#temporals.format(prodcutDetail.fgProductExpDate, 'yy.MM.dd')}"></span>
                             </div>
                             <div class="productDetail-detail-top-co2">
-                                <img src="./../../static/img/shopping/productListco2.png" alt="">
-                                2kg
+                                <img th:src="@{/img/shopping/productListco2.png}" alt="">
+                                <span  th:text="${prodcutDetail.fgProductWeight} + 'kg'"></span>
                             </div>
                         </span>
                     </div>
@@ -69,31 +63,31 @@
                 <div class="productDetail-detail-detail">
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">중량/용량</div>
-                        <div class="productDetail-detail-text">
+                        <div class="productDetail-detail-text" th:text="${prodcutDetail.fgProductWeight} + 'kg'">
                             1kg(4~7입)
                         </div>
                     </div>
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">소비기한</div>
-                        <div class="productDetail-detail-text">
+                        <div class="productDetail-detail-text" th:text="${#temporals.format(prodcutDetail.fgProductExpDate, 'yy.MM.dd')} + '까지'">
                             ~ 2024년 10월 15일
                         </div>
                     </div>
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">상품 설명</div>
-                        <div class="productDetail-detail-text" id="description">
+                        <div class="productDetail-detail-text" id="description" th:text="${prodcutDetail.fgProductContent}">
                             부드럽고 고소한 아보카도 과육은 마치 싱그러운 버터를 한 입 베어 문 것 같은 착각에 빠지게 만들어요. 울퉁불퉁하고 투박한 겉모습과 달리, 반을 가르면 등장하는 매끄러운 과육과 동글동글한 씨앗이 눈길을 끌지요. 샐러드, 비빔밥, 샌드위치 등 다양한 요리에 활용할 수 있는 만능 식재료이니까요.
                         </div>
                     </div>
                     <div class="productDetail-detail-detail-box">
-                        <div class="productDetail-detail-detail-title">업체명</div>
+                        <div class="productDetail-detail-detail-title" >업체명</div>
                         <span>
-                            <div class="productDetail-detail-text">
+                            <div class="productDetail-detail-text" th:text="${prodcutDetail.fgBusinessName}">
                                 빌즈 강남
                             </div>
                             <div class="productDetail-detail-text-chat">
                                 <button type="button" id="chat-btn">
-                                    <img src="./../../static/img/shopping/chat.png" alt="">
+                                    <img th:src="@{/img/shopping/chat.png}" alt="">
                                     판매자와 채팅하기
                                 </button>
                             </div>
@@ -101,19 +95,19 @@
                     </div>
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">업체 주소</div>
-                        <div class="productDetail-detail-text">
+                        <div class="productDetail-detail-text" th:text="${prodcutDetail.fgBusinessAddressDetail}">
                             서울 강남구 테헤란로 142 아크플레이스 2층
                         </div>
                     </div>
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">영업시간</div>
-                        <div class="productDetail-detail-text">
+                        <div class="productDetail-detail-text" th:text="'매일 ' + ${prodcutDetail.fgBusinessOpenTime} + ' ~ ' + ${prodcutDetail.fgBusinessCloseTime}">
                             매일 10:30 ~ 22:00
                         </div>
                     </div>
                     <div class="productDetail-detail-detail-box">
                         <div class="productDetail-detail-detail-title">업체 전화번호</div>
-                        <div class="productDetail-detail-text">
+                        <div class="productDetail-detail-text" th:text="${prodcutDetail.fgBusinessPhone}">
                            02-568-1353
                         </div>
                     </div>
@@ -126,9 +120,12 @@
         <div class="productDetail-wrap2">
             <div class="productDetail-buy">
                 <button type="button" id="cart" onclick="location.href='cart.html'">장바구니</button>
-                <button type="button" id="buy" onclick="location.href='payment.html'">바로 구매</button>
+                <button type="submit" id="buy">
+                    바로구매
+                </button>
             </div>
         </div>
+        </form>
     </div>
 <footer id="footer" th:replace="~{/main/fragment/footer/userFooter}"></footer>
 </body>

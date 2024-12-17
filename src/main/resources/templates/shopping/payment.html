@@ -21,6 +21,14 @@
     <div class="payment-wrap2">
         <div class="payment-payment">
             <div class="payment-payment-product">
+                <input type="hidden" id="productId" th:value="${productId}">
+                <input type="hidden" id="orderDetailId" th:value="${orderDetailId}">
+                <input type="hidden" id="orderId" th:value="${orderId}">
+                <input type="hidden" id="productName" th:value="${productName}">
+                <input type="hidden" id="productWeight" th:value="${productWeight}">
+                <input type="hidden" id="productQuantity" th:value="${productQuantity}">
+                <input type="hidden" id="productExpTime" th:value="${productExpTime}">
+                <input type="hidden" id="productPrice" th:value="${productPrice}">
                 <div class="payment-payment-product-img">
 <!--                    <img th:src="@{'/upload_moamz/' + ${productFileRoot} + '/' + ${productFileUuid}-->
 <!--                                                + '_' + ${productFileName}}" style="width: 200px; height: 180px;">-->
@@ -32,7 +40,7 @@
                     </div>
                     <div class="payment-payment-product-text-eco">
                         <span>
-                            <div class="payment-payment-product-text-eco-calendar"th:text="${#temporals.format(productExpTime, 'yy.MM.dd')}">
+                            <div class="payment-payment-product-text-eco-calendar" th:text="${#temporals.format(productExpTime, 'yy.MM.dd')}">
                                 <img th:src="@{/img/shopping/productListcalendar.png}" alt="">
                                 24.10.15
                             </div>
@@ -68,7 +76,7 @@
                                 포인트 차감
                                 <span>(100p)</span>
                             </div>
-                            <textarea name="point" id="" style="resize: none;" placeholder="200p"></textarea>
+                            <textarea name="point" id="point" style="resize: none;" placeholder="200p"></textarea>
                         </span>
                     </div>
                 </div>
@@ -81,7 +89,7 @@
                         회원 본인은 주문내용을 확인했으며, 
                         물품의 소비기한, 픽업 방식과 결제에 동의합니다
                     </div>
-                    <div class="payment-payment-payment-final-btn">
+                    <div class="payment-payment-payment-final-btn" id="kakaoPay">
                         <button type="button">
                             <img th:src="@{/img/shopping/Kakaopay.png}" alt="">
                         </button>

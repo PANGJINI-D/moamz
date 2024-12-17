@@ -45,33 +45,15 @@
     <!-- 마이페이지 메뉴 카테고리 -->
     <div class="mypage-side-category">
       <ul>
-        <li class="category-list">
-          <a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/userMySocialing.html}">● MY소셜링</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/normal/my/sharing/completed}" class="clicked">● My나눔</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/userMyReview.html}">● MY리뷰</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/userMyLike.html}">● MY좋아요</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/userMyPost.html}">● MY게시글</a>
-        </li>
-        <li class="category-list">
-          <a href="#">● 회원정보변경</a>
-        </li>
-        <li class="category-list">
-          <a href="#">● 비밀번호변경</a>
-        </li>
-        <li class="category-list">
-          <a th:href="@{/normal/inquiry/list}">● 관리자 문의</a>
-        </li>
+        <li class="category-list"><a th:href="@{/normal/purchase/list}">● 상품 구매 내역</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/socialing}">● MY소셜링</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/sharing/completed}" class="clicked">● My나눔</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/review}">● MY리뷰</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/like}">● MY좋아요</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/postEco}">● MY게시글</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/infoauth}">● 회원정보변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/my/password/change}">● 비밀번호변경</a></li>
+        <li class="category-list"><a th:href="@{/normal/inquiry/list}">● 관리자 문의</a></li>
       </ul>
     </div>
   </div>
@@ -81,7 +63,7 @@
     <div class="sharing-box">
       <!-- 나눔 제목 -->
       <div class="sharing-box-title">
-        <img th:src="@{/static/img/mypage/regular/mysharingImg.png}" alt="내 나눔 관리하기">
+        <img th:src="@{/img/mypage/regular/mysharingImg.png}" alt="내 나눔 관리하기">
         <span>내 나눔 관리하기</span>
       </div>
       <!-- 나눔 카테고리 -->
@@ -94,10 +76,10 @@
       <div class="sharing-possibility-list">
         <div class="sharing-info-list" th:each="sharing : ${sharings}">
           <div class="sharing-info-list-img">
-            <img th:src="@{/static/img/mypage/regular/mysharingListImg.png}" alt="나눔 이미지">
+            <img th:src="@{/img/mypage/regular/mysharingListImg.png}" alt="나눔 이미지">
           </div>
           <div class="sharing-info-list-text">
-            <p th:text="${sharing.title}">삼성 55인치 TV 무료 나눔해요</p>
+            <p th:text="${sharing.fgTitle}">삼성 55인치 TV 무료 나눔해요</p>
             <p th:text="${sharing.date}">2024.10.05  14:45</p>
             <div id="detail-btn">
               <a th:href="@{/community/sharing/sharingDetail.html(id=${sharing.id})}">자세히 보러가기 &gt;</a>

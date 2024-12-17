@@ -136,6 +136,9 @@ button:hover{
 }
 .productDetail-detail-top-eco > span{
   display: flex;
+  align-content: center;
+  align-items: center;
+  margin-bottom: 15px;
 }
 .productDetail-detail-top-calendar{
   display: flex;
@@ -146,7 +149,8 @@ button:hover{
 .productDetail-detail-top-co2{
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+
+  /*margin-bottom: 15px;*/
 }
 .productDetail-detail-top-eco > span > div > img{
   margin-right: 5px;
@@ -170,7 +174,7 @@ button:hover{
   margin-top: 5px;
   display: flex;
   justify-content: space-between;
-  width: 120px;
+  width: 150px;
 }
 .productDetail-detail-detail-map{
   margin-top: 30px;

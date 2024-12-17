@@ -9,6 +9,9 @@ $(document).ready(function() {
         const $productWeightDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-weight"); // 무게 표시 선택
         const $productPriceDisplay = $(this).closest(".cart-product-detail-product").find(".cart-product-detail-product-intro-text-price"); // 가격 표시 선택
         const id = document.querySelector('#selectedProductName');
+        const $hiddenPriceInput = $("#selectedProductPrice"); // Hidden input 값 업데이트
+        const $hiddenPriceWeight = $('#selectedProductWeight');
+        const $hiddenQuantity = $('#selectedProductQuantity');
 
         // data-* 속성 값 가져오기
         let productWeight = parseFloat($productWeightDisplay.data("fg-product-weight"));
@@ -42,12 +45,16 @@ $(document).ready(function() {
         function updateCartDisplay(count) {
             // 수량에 따른 무게, 가격 계산 후 업데이트
             const totalWeight = (productWeight * count).toFixed(2);  // 무게 계산
-            const totalPrice = (productPrice * count).toLocaleString();  // 가격 계산 (천 단위 구분)
+            const totalPrice = (productPrice * count);  // 가격 계산 (천 단위 구분)
 
             // 화면에 표시
             $countDisplay.text(count);  // 카운트 표시 업데이트
             $productWeightDisplay.text(totalWeight + ' kg');  // 무게 업데이트
             $productPriceDisplay.text(totalPrice + '원');  // 가격 업데이트
+
+            $hiddenPriceInput.val(totalPrice);
+            $hiddenPriceWeight.val(totalWeight);
+            $hiddenQuantity.val(count);
         }
     });
 });
@@ -88,18 +95,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("cartForm");
 
     // 선택된 상품 정보를 hidden input에 설정
-    // radios.forEach((radio) => {
-    //     radio.addEventListener("change", function () {
-    //         document.getElementById("selectedProductId").value = radio.getAttribute("data-product-id");
-    //         document.getElementById("selectedProductName").value = radio.getAttribute("data-product-name");
-    //         document.getElementById("selectedProductPrice").value = radio.getAttribute("data-product-price");
-    //         document.getElementById("selectedProductWeight").value = radio.getAttribute("data-product-weight");
-    //         document.getElementById("selectedProductExpTime").value = radio.getAttribute("data-product-exp-time");
-    //     });
-    // });
+    radios.forEach((radio) => {
+        radio.addEventListener("change", function () {
+            // 선택된 라디오 버튼의 값 (상품 ID) 가져오기
+            const productId = radio.value;
+
+            // 해당 상품의 숨겨진 데이터를 가져와 hidden input에 설정
+            document.getElementById("selectedProductId").value = document.getElementById(`productId-${productId}`).value;
+            document.getElementById("selectedProductName").value = document.getElementById(`productName-${productId}`).value;
+            document.getElementById("selectedProductPrice").value = document.getElementById(`productPrice-${productId}`).value;
+            document.getElementById("selectedProductWeight").value = document.getElementById(`productWeight-${productId}`).value;
+            document.getElementById("selectedProductExpTime").value = document.getElementById(`productExpTime-${productId}`).value;
+            document.getElementById("selectedProductFileRoot").value = document.getElementById(`productFileRoot-${productId}`).value;
+            document.getElementById("selectedProductFileUuid").value = document.getElementById(`productFileUuid-${productId}`).value;
+            document.getElementById("selectedProductFileName").value = document.getElementById(`productFileName-${productId}`).value;
+        });
+    });
 
     // 폼 전송 시 선택 확인
     form.addEventListener("submit", function (e) {
+        // 라디오 버튼이 선택되지 않았을 경우 전송 방지 및 경고 표시
         if (!document.querySelector('input[name="selectProduct"]:checked')) {
             e.preventDefault();
             alert("상품을 선택해주세요.");

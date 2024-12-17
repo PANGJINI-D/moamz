@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../static/css/reset2.css">
-    <link rel="stylesheet" href="../../../static/css/mypage/regular/userWithdraw.css">
-    <script defer src="../../../static/js/mypage/regular/userWithdraw.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reset2.css}">
+    <link rel="stylesheet" th:href="@{/static/css/mypage/regular/userWithdraw.css}">
+    <script defer th:src="@{/static/js/mypage/regular/userWithdraw.js}"></script>
     <title>회원탈퇴</title>
 </head>
 <body>
-    <header id="header"></header>
+<header id="header" th:replace="~{/main/fragment/header/userHeaderLogin.html}"></header>
     <main>
         <div class="user-withdraw-container">
             <!-- 제목 영역 -->
@@ -50,13 +50,7 @@
             </div>
         </div>
     </main>
-    <footer id="footer"></footer>
+<footer id="footer" th:replace="~{/main/fragment/footer/userFooter.html}"></footer>
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-    $(function() {
-        $("#header").load("../../main/fragment/header/userHeaderLogin.html");
-        $("#footer").load("../../main/fragment/footer/userFooter.html");
-    });
-</script>
 </html>

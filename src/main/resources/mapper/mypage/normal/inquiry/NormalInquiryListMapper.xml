@@ -3,12 +3,16 @@
 <mapper namespace="com.example.moamz.mapper.mypage.normal.inquiry.NormalInquiryMapper">
     <select id="selectNormalInquiryList" resultType="NormalInquiryListDTO">
         -- 관리자 문의내역 조회
-        SELECT p.FG_POST_TITLE , p.FG_POST_CREATED_AT ,
+        SELECT p.FG_POST_ID,
+               p.FG_POST_TITLE,
+               TO_CHAR(p.FG_POST_CREATED_AT, 'YY/MM/DD HH24:MI'),
                CASE i.FG_INQUIRY_STATUS
                    WHEN '0' THEN '확인중'
                    WHEN '1' THEN '답변완료'
                    END AS 답변상태
         FROM FG_POST p, FG_INQUIRY i
-        WHERE p.FG_POST_ID = i.FG_POST_ID AND p.FG_USER_CODE = #{fgUserCode}
+        WHERE p.FG_POST_ID = i.FG_POST_ID
+          AND p.FG_USER_CODE = #{fgUserCode}
+        ORDER BY p.FG_POST_CREATED_AT DESC
     </select>
 </mapper>

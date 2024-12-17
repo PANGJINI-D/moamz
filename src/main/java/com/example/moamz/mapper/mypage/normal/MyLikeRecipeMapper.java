@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MyLikeRecipeMapper {
-    List<MyLikeRecipeDTO> selectMyLikeRecipe();
+    List<MyLikeRecipeDTO> selectMyLikeRecipe(Long fgUserCode);
 }

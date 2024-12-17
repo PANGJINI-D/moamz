@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>결제 승인 완료</title>
+</head>
+<body>
+<h1>결제가 승인되었습니다!</h1>
+<p>응답 메시지:</p>
+<pre th:text="${response}"></pre>
+<a th:href="@{/main}">내 주문 보기(마이페이지 이동)</a>
+</body>
+</html>

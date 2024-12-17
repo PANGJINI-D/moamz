@@ -22,8 +22,9 @@
         <div class="post-info-wrap">
             <div class="post-title" th:text="${certDetail.fgPostTitle}">플로깅 인증</div>
             <div class="user-info-wrap">
-                <img th:src="@{'/upload_moamz/' + ${certDetail.userFileRoot} + '/' + ${certDetail.userFileUuid}
-                                                + '_' + ${certDetail.userFileName}}">
+<!--                <img th:src="@{'/upload_moamz/' + ${certDetail.userFileRoot} + '/' + ${certDetail.userFileUuid}-->
+<!--                                                + '_' + ${certDetail.userFileName}}">-->
+                <img th:src="@{/img/community/profile.png}">
                 <span class="user-nickname" th:text="${certDetail.fgNormalName}">역삼동불주먹먹먹먹먹</span>
                 <div class="post-write-time-wrap">
                     <span>작성일</span>
@@ -36,8 +37,9 @@
                 <div class="btn-wrap">
                     <!-- 다른 사람이 쓴 글일 때 버튼 -->
                     <div class="btn-others" onclick="location.href='./../../chat/chatRoom.html'">
-                        <img src="../../../static/img/community/chatToWriter.png" alt="작성자와_채팅하기"
-                             class="chat-to-writer-btn">
+<!--                        <img src="../../../static/img/community/chatToWriter.png" alt="작성자와_채팅하기"-->
+<!--                             class="chat-to-writer-btn">-->
+                        <img th:src="@{/img/community/chatToWriter.png}" class="chat-to-writer-btn">
                     </div>
                     <!-- 내가 쓴 글일 때 보이는 버튼 -->
                     <div class="btn-writer">

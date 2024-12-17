@@ -12,6 +12,6 @@ import lombok.ToString;
 public class OrderDetailDTO {
     private Long fgOrderDetailId;
     private String fgTransactionId;
-    private String fgOrderId;
+    private Long fgOrderId;
     private String fgProductName;
 }

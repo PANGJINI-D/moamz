@@ -11,13 +11,15 @@ import lombok.ToString;
 @NoArgsConstructor
 public class OrderDTO {
     private Long fgOrderId;
-    private String fgOrderStatus;
+    private String fgPaymentStatus;
     private int fgOrderQuantity;
     private int fgOrderPerPrice;
     private int fgOrderTax;
-    private int fgOrderUserPoint;
+    private int fgOrderUsedPoint;
     private int fgOrderAmount;
     private String fgOrderDate;
+    private String fgProductName;
     private Long fgUserCode;
     private Long fgProductId;
+    private Long fgBusinessId;
 }

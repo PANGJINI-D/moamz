@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface MyLikeFreeMapper {
-    List<MyLikeFreeDTO> selectMyLikeFree();
+    List<MyLikeFreeDTO> selectMyLikeFree(Long fgUserCode);
 }

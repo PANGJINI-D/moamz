@@ -24,4 +24,8 @@ public class ProductListMainDTO {
     private String fgSubCategoryName;
     private Long fgBusinessId;
     private String fgBusinessName;
+
+    private String productFileName;
+    private String productFileRoot;
+    private String productFileUuid;
 }
