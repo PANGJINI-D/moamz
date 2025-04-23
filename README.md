@@ -64,7 +64,13 @@
 <br><br>
 
 
-## 🏷️내가 맡은 기능 or 나의 작업
+## 🏷️내가 맡은 서비스
+
+### 📽서비스 시연 영상(click)  
+<a href="https://drive.google.com/file/d/1XbMmXhIb92AHV9wPxQtTiObbhR2Xt7-u/view?usp=drive_link" target="_blank">
+  <img src="https://github.com/user-attachments/assets/dd6fed69-772d-4e3a-ab92-f7e17136348b" width="600"/>
+</a>
+
   
 **1. 나눔게시판** [상세보기 WIKI로 이동→](https://github.com/PANGJINI-D/moamz/wiki/%EB%82%98%EB%88%94%EA%B2%8C%EC%8B%9C%ED%8C%90)
 
