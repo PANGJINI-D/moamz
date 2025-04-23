@@ -67,7 +67,7 @@
 ## 🏷️내가 맡은 서비스
 
 ### 📽서비스 시연 영상(click)  
-<a href="https://drive.google.com/file/d/1XbMmXhIb92AHV9wPxQtTiObbhR2Xt7-u/view?usp=drive_link" target="_blank">
+<a href="https://drive.google.com/file/d/1XbMmXhIb92AHV9wPxQtTiObbhR2Xt7-u/view?usp=sharing" target="_blank">
   <img src="https://github.com/user-attachments/assets/dd6fed69-772d-4e3a-ab92-f7e17136348b" width="600"/>
 </a>
 
